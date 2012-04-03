@@ -1,4 +1,4 @@
-== ScalaEightQueens
+## ScalaEightQueens
 This is a scala implementation of the Eight Queens algorithm.
 
 Run output:
@@ -129,7 +129,7 @@ found 92 distinct solutions
 found 12 unique solutions
 ```
 
-== License LGPL
+## License LGPL
 Copyright 2012 Wes Freeman
 
 This program is free software: you can redistribute it and/or modify
