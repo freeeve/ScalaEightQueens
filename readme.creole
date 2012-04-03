@@ -2,6 +2,7 @@
 This is a scala implementation of the Eight Queens algorithm.
 
 Run output:
+
 ```
 [info] Running scala.eightqueens.EightQueens 
 List(5, 2, 8, 1, 4, 7, 3, 6)
