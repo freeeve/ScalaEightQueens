@@ -3,27 +3,31 @@ import scala.collection.mutable.Stack
 
 object EightQueens {
   def main(args:Array[String]) : Unit = {
-     findQueens();
+    n = Integer.parseInt(args.first) 
+    findQueens();
   }
+  var n:Int = 8;
   
   def findQueens(): Unit = {
     var stack: Stack[List[Int]] = new Stack[List[Int]]
-    for (row <- 1 to 8) {
+    for (row <- 1 to n) {
       stack = stack.push(List(row));
     }
     var found:List[List[Int]] = List()
     var unique:List[List[Int]] = List()
+    var count:Long = 0;
     while (stack.size > 0) {
       // depth first tree search... pop off the top list
       val cur: List[Int] = stack.pop
       // if we get to size 8, we found a solution
-      if (cur.size == 8) {
-         found ::= cur
-         if(!findRotate(unique, cur) && !unique.contains(cur.reverse)) {
-           unique ::= cur
-         }
+      if (cur.size == n) {
+        found ::= cur
+        count+=1;
+        if(!findRotate(unique, cur) && !unique.contains(cur.reverse)) {
+          unique ::= cur
+        }
       }
-      for (row <- 1 to 8) {
+      for (row <- 1 to n) {
         var next: List[Int] = cur;
         // checks verticals and diagonals before pushing
         if (!next.contains(row) && !checkDiagonal(next, row)) {
@@ -37,15 +41,15 @@ object EightQueens {
         println(printBoard(b))
       }
     )
-    println("found %d distinct solutions".format(found.size))
+    println("found %d distinct solutions".format(count))
     println("found %d unique solutions".format(unique.size))
   }
   
   // prints the board to a string
   def printBoard(board:List[Int]):String = {
     var ret:String = ""
-    for(col <- 1 to 8) {
-      for(row <- 1 to 8) { 
+    for(col <- 1 to n) {
+      for(row <- 1 to n) { 
         def mid:String = {
            if(board(col-1) == row) {
              "Q"
@@ -117,8 +121,8 @@ object EightQueens {
   // print the board rotated 90 degrees
   def printBoardRotate(board:List[Int]):String = {
     var ret:String = ""
-    for(row <- 1 to 8) {
-      for(col <- 1 to 8) { 
+    for(row <- 1 to n) {
+      for(col <- 1 to n) { 
         def mid:String = {
            if(board(col-1) == row) {
              "Q"
@@ -136,8 +140,8 @@ object EightQueens {
   // print the board rotated 180 degrees
   def printBoard180(board:List[Int]):String = {
     var ret:String = ""
-    for(col <- 8 to 1 by -1) {
-      for(row <- 8 to 1 by -1) { 
+    for(col <- n to 1 by -1) {
+      for(row <- n to 1 by -1) { 
         def mid:String = {
            if(board(col-1) == row) {
              "Q"
